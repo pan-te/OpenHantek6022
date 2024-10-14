@@ -319,6 +319,8 @@ class HantekDsoControl : public QObject {
     void communicationError() const;
 
     void liveCalibrationError() const; // live calibration stopped due to noise or big offset
+
+    void scopeTriggered(const DSOsamples *samples);
 };
 
 Q_DECLARE_METATYPE( DSOsamples * )

@@ -49,6 +49,8 @@
 #include "exporting/exporterregistry.h"
 #include "exporting/exportjson.h"
 
+#include "saveontrigger.h"
+
 // GUI
 #include "mainwindow.h"
 #include "selectdevice/selectsupporteddevice.h"
@@ -435,6 +437,7 @@ int main( int argc, char *argv[] ) {
     QObject::connect( &dsoControl, &HantekDsoControl::samplesAvailable, &postProcessing, &PostProcessing::input );
     QObject::connect( &postProcessing, &PostProcessing::processingFinished, &exportRegistry, &ExporterRegistry::input,
                       Qt::DirectConnection );
+    QObject::connect( &dsoControl, &HantekDsoControl::scopeTriggered, saveOnTrigger);
 
     if ( verboseLevel )
         qDebug() << startupTime.elapsed() << "ms:"
