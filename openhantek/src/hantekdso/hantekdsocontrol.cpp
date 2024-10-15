@@ -876,7 +876,8 @@ void HantekDsoControl::stateMachine() {
             // trigger functions below are in separate file "triggering.cpp"
             triggering->searchTriggeredPosition( result );          // detect trigger point
             triggered = triggering->provideTriggeredData( result ); // present either free running or last triggered trace
-            if (triggered && controlsettings.trigger.mode == Dso::TriggerMode::SINGLE) {
+            if (triggered &&
+                (controlsettings.trigger.mode == Dso::TriggerMode::SINGLE || controlsettings.trigger.mode == Dso::TriggerMode::NORMAL)) {
                 emit scopeTriggered( &result );
             }
         } else {                                                    // free running display
